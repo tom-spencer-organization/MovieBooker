@@ -20,10 +20,10 @@ jobs:
           java-version: '20'
           distribution: 'corretto'
 
-      - name:
-          uses: actions/setup-node@v3
-          with:
-            node-version: 20
+      - name: Set up Node 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
