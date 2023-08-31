@@ -3,7 +3,6 @@
     "build": "npm-run-all --parallel build:*",
     "build:html": "node copy-files.js .*\\.html$",
     "build:css": "mkdirp target/classes/static/css && postcss src/main/resources/static/css/*.css -d target/classes/static/css",
-    "build:docker-database": "docker-compose -f docker/docker-compose.yml up",
     "build:js": "mkdirp target/classes/static/js && babel src/main/resources/static/js/ --out-dir target/classes/static/js/",
     "build:svg": "mkdirp target/classes/static/svg && node copy-files.js .*\\.svg$",
     "build-prod": "NODE_ENV='production' npm-run-all --parallel build-prod:*",
