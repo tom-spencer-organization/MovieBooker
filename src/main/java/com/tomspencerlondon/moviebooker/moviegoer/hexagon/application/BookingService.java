@@ -101,6 +101,8 @@ public class BookingService {
         payment.associateBooking(savedBooking);
         paymentRepository.save(payment);
 
+        notifier.confirmBooking(booking);
+
         return bookingResult;
     }
 

@@ -17,6 +17,17 @@ public class EmailNotifier implements Notifier {
 
   @Override
   public void confirmBooking(Booking booking) {
+    String body = """
+                Hi,
+                                           
+                Thank you for your payment for '%s' tickets to see %s on DATE at Clapham Picture House.
+                We can confirm that we have made the booking. Look forward to seeing you then.
+                """.formatted(
+                    booking.numberOfSeatsBooked(),
+                    booking.filmName());
 
+    EmailToSend emailToSend = new EmailToSend("MovieBooker ticket booked!", body,
+        "tomspencerlondon@gmail.com");
+    emailer.send(emailToSend);
   }
 }
