@@ -4,6 +4,7 @@ import com.tomspencerlondon.moviebooker.common.hexagon.application.port.BookingR
 import com.tomspencerlondon.moviebooker.common.hexagon.application.port.MovieGoerRepository;
 import com.tomspencerlondon.moviebooker.common.hexagon.application.port.MovieProgramRepository;
 import com.tomspencerlondon.moviebooker.common.hexagon.application.port.PaymentRepository;
+import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.port.Notifier;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.domain.*;
 
 import java.time.LocalDateTime;
@@ -17,11 +18,15 @@ public class BookingService {
 
     private PaymentRepository paymentRepository;
 
-    public BookingService(BookingRepository bookingRepository, MovieProgramRepository movieProgramRepository, MovieGoerRepository movieGoerRepository, PaymentRepository paymentRepository) {
+    private Notifier notifier;
+
+    public BookingService(BookingRepository bookingRepository, MovieProgramRepository movieProgramRepository, MovieGoerRepository movieGoerRepository, PaymentRepository paymentRepository,
+        Notifier notifier) {
         this.bookingRepository = bookingRepository;
         this.movieProgramRepository = movieProgramRepository;
         this.movieGoerRepository = movieGoerRepository;
         this.paymentRepository = paymentRepository;
+        this.notifier = notifier;
     }
 
     public List<Booking> findAllBookingsFor(String userName) {
@@ -53,7 +58,7 @@ public class BookingService {
         Booking savedBooking = bookingRepository.save(booking);
         payment.associateBooking(savedBooking);
         paymentRepository.save(payment);
-
+        notifier.confirmBooking(savedBooking);
         return notification;
     }
 

@@ -1,11 +1,11 @@
 package com.tomspencerlondon.moviebooker.moviegoer.config;
 
-import com.tomspencerlondon.moviebooker.admin.hexagon.application.port.AdminUserRepository;
 import com.tomspencerlondon.moviebooker.common.hexagon.application.port.*;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.BookingService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.CustomUserDetailsService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieGoerService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieService;
+import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.port.Notifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,8 +19,8 @@ public class MovieConfig {
 
     @Bean
     public BookingService bookingService(BookingRepository bookingRepository, MovieProgramRepository movieProgramRepository,
-                                         MovieGoerRepository movieGoerRepository, PaymentRepository paymentRepository) {
-        return new BookingService(bookingRepository, movieProgramRepository, movieGoerRepository, paymentRepository);
+                                         MovieGoerRepository movieGoerRepository, PaymentRepository paymentRepository, Notifier notifier) {
+        return new BookingService(bookingRepository, movieProgramRepository, movieGoerRepository, paymentRepository, notifier);
     }
 
     @Bean
