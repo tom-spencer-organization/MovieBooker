@@ -1,10 +1,11 @@
 package com.tomspencerlondon.moviebooker.moviegoer.adapter.in.web;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class MovieGoerRegistrationForm {
 
-    @NotBlank
+    @Email
     private String userName;
 
     @NotBlank

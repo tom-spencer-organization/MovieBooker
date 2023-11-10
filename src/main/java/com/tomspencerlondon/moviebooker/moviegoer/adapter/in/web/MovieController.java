@@ -6,6 +6,7 @@ import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieGoerS
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.Notification;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.domain.*;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -73,7 +75,11 @@ public class MovieController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("movieGoerRegistrationForm") MovieGoerRegistrationForm movieGoerRegistrationForm, Model model) {
+    public String register(@Valid @ModelAttribute("movieGoerRegistrationForm") MovieGoerRegistrationForm movieGoerRegistrationForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "moviegoer/registration";
+        }
+
         // TODO: is the right place for the passwordEncoder? Should the passwordEncoder be used in the SecurityConfig
         MovieGoer movieGoer = new MovieGoer(
                 null, null, movieGoerRegistrationForm.getUserName(),

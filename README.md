@@ -6,6 +6,8 @@
 ### Updated Design
 ![image](https://user-images.githubusercontent.com/27693622/226958765-a7f662da-0418-4c15-ab27-8713d1caf92b.png)
 
+### Cloud Architecture
+![image](https://github.com/TomSpencerLondon/LeetCode/assets/27693622/93bdbb05-03a0-4ebe-a6d4-37f9fc7d43b5)
 
 ```bash
 mvn clean install spring-boot:run
