@@ -1,10 +1,10 @@
 package com.tomspencerlondon.moviebooker.moviegoer.adapter.in.web;
 
 import com.tomspencerlondon.moviebooker.common.hexagon.ImageService;
+import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.BookingResult;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.BookingService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieGoerService;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.MovieService;
-import com.tomspencerlondon.moviebooker.moviegoer.hexagon.application.Notification;
 import com.tomspencerlondon.moviebooker.moviegoer.hexagon.domain.*;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -137,9 +137,9 @@ public class MovieController {
         MovieProgram movieProgram = movieService.findMovieProgramBy(bookingForm.getScheduleId());
         Booking booking = BookingForm.to(bookingForm, movieProgram);
         Payment payment = BookingForm.toPayment(bookingForm);
-        Notification notification = bookingService.payForBooking(booking, payment);
+        BookingResult bookingResult = bookingService.payForBooking(booking, payment);
 
-        if (notification.isSuccess()) {
+        if (bookingResult.isSuccess()) {
             return "redirect:/moviegoer/bookings";
         } else {
             return "redirect:/moviegoer/seatsNotAvailable";
@@ -164,9 +164,9 @@ public class MovieController {
                                    @RequestParam("bookingId") Long bookingId,
                                    @RequestParam("additionalSeats") int additionalSeats) {
         Payment payment = AmendBookingForm.toPayment(amendBookingForm);
-        Notification notification = bookingService.amendBooking(bookingId, additionalSeats, payment);
+        BookingResult bookingResult = bookingService.amendBooking(bookingId, additionalSeats, payment);
 
-        if(notification.isSuccess()) {
+        if(bookingResult.isSuccess()) {
             return "redirect:/moviegoer/bookings";
         } else {
             return "redirect:/moviegoer/seatsNotAvailable?bookingId=" + bookingId;

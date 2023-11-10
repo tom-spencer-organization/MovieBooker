@@ -39,10 +39,10 @@ public class BookingService {
 
     public Notification payForBooking(Booking booking, Payment payment) {
         MovieProgram movieProgram = booking.movieProgram();
-        Notification notification = new Notification();
+        Notification bookingResult = new Notification();
         if (!movieProgram.seatsAvailableFor(booking.numberOfSeatsBooked())) {
-            notification.addError("No seats available");
-            return notification;
+            bookingResult.addError("No seats available");
+            return bookingResult;
         }
 
         MovieGoer movieGoer = movieGoerRepository.findById(booking.movieGoerId())
@@ -53,7 +53,7 @@ public class BookingService {
         payment.associateBooking(savedBooking);
         paymentRepository.save(payment);
 
-        return notification;
+        return bookingResult;
     }
 }
 ```

@@ -95,9 +95,9 @@ public class MovieController {
     MovieProgram movieProgram = movieService.findMovieProgramBy(bookingForm.getScheduleId());
     Booking booking = BookingForm.to(bookingForm, movieProgram);
     Payment payment = BookingForm.toPayment(bookingForm);
-    BookingOutcome notification = bookingService.save(booking, payment);
+    BookingOutcome bookingResult = bookingService.save(booking, payment);
 
-    if (notification.isSuccess()) {
+    if (bookingResult.isSuccess()) {
       return "redirect:/bookings";
     } else {
       return "redirect:/seatsNotAvailable";
@@ -113,10 +113,10 @@ public class MovieController {
 ### 1/4/23
 - Interesting discussion about Command Query Separation (CQS)
 - We wanted to move decision logic into the service layer so that it could be shared between MVC and SPA type approaches
-  - this required returning a result or notification from operations
+  - this required returning a result or bookingResult from operations
   - we spoke about whether this violated the CQS rule
   - we discussed the approach of using exceptions as an alternative
-  - Martin Fowler article was helpful to show errors in a notification result
+  - Martin Fowler article was helpful to show errors in a bookingResult result
     - https://martinfowler.com/articles/replaceThrowWithNotification.html
   - we used this approach for our problem
 
@@ -128,9 +128,9 @@ public class MovieController {
     MovieProgram movieProgram = movieService.findMovieProgramBy(bookingForm.getScheduleId());
     Booking booking = BookingForm.to(bookingForm, movieProgram);
     Payment payment = BookingForm.toPayment(bookingForm);
-    Notification notification = bookingService.payForBooking(booking, payment);
+    Notification bookingResult = bookingService.payForBooking(booking, payment);
 
-    if (notification.isSuccess()) {
+    if (bookingResult.isSuccess()) {
       return "redirect:/bookings";
     } else {
       return "redirect:/seatsNotAvailable";
@@ -142,9 +142,9 @@ public class MovieController {
                                  @RequestParam("bookingId") Long bookingId,
                                  @RequestParam("additionalSeats") int additionalSeats) {
     Payment payment = AmendBookingForm.toPayment(amendBookingForm);
-    Notification notification = bookingService.amendBooking(bookingId, additionalSeats, payment);
+    Notification bookingResult = bookingService.amendBooking(bookingId, additionalSeats, payment);
 
-    if(notification.isSuccess()) {
+    if(bookingResult.isSuccess()) {
       return "redirect:/bookings";
     } else {
       return "redirect:/seatsNotAvailable?bookingId=" + bookingId;
@@ -157,10 +157,10 @@ The BookingService functions:
 public class BookingService {
   public Notification payForBooking(Booking booking, Payment payment) {
     MovieProgram movieProgram = booking.movieProgram();
-    Notification notification = new Notification();
+    Notification bookingResult = new Notification();
     if (!movieProgram.seatsAvailableFor(booking.numberOfSeatsBooked())) {
-      notification.addError("No seats available");
-      return notification;
+      bookingResult.addError("No seats available");
+      return bookingResult;
     }
 
     MovieGoer movieGoer = movieGoerRepository.findById(booking.movieGoerId())
@@ -171,18 +171,18 @@ public class BookingService {
     payment.associateBooking(savedBooking);
     paymentRepository.save(payment);
 
-    return notification;
+    return bookingResult;
   }
   
   public Notification amendBooking(Long bookingId, int additionalSeats, Payment payment) {
-    Notification notification = new Notification();
+    Notification bookingResult = new Notification();
 
     Booking booking = bookingRepository.findById(bookingId).orElseThrow(IllegalArgumentException::new);
     boolean seatsAvailable = booking.movieProgram().seatsAvailableFor(additionalSeats);
 
     if (!seatsAvailable) {
-      notification.addError("Seats not available");
-      return notification;
+      bookingResult.addError("Seats not available");
+      return bookingResult;
     }
 
     booking.addSeats(additionalSeats);
@@ -194,7 +194,7 @@ public class BookingService {
     payment.associateBooking(savedBooking);
     paymentRepository.save(payment);
 
-    return notification;
+    return bookingResult;
   }
   
 }

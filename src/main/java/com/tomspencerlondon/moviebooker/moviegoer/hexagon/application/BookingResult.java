@@ -3,10 +3,10 @@ package com.tomspencerlondon.moviebooker.moviegoer.hexagon.application;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notification {
+public class BookingResult {
     private final List<String> errors = new ArrayList<>();
 
-    public Notification() {
+    public BookingResult() {
     }
 
     public boolean isSuccess() {
