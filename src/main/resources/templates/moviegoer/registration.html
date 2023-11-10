@@ -83,7 +83,7 @@
                                 <div class="space-y-1">
                                     <label for="password"
                                            class="block text-sm font-medium text-gray-700">Password
-                                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                                        <p class="text-red-500" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                                     </label>
                                     <div class="mt-1">
                                         <input id="password" th:field="*{password}"
