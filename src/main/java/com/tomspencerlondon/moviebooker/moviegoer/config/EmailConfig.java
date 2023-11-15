@@ -22,7 +22,7 @@ public class EmailConfig {
   @Value("${spring.mail.password}")
   private String password;
 
-  @Value("${spring.mail.protocol}")
+  @Value("${spring.mail.properties.mail.transport.protocol}")
   private String protocol;
 
   @Value("${spring.mail.properties.mail.smtp.auth}")
@@ -30,10 +30,6 @@ public class EmailConfig {
 
   @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
   private String enable;
-
-
-
-
 
   @Bean
   public JavaMailSender javaMailSender() {
