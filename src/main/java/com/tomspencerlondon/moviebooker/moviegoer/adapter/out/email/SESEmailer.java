@@ -1,5 +1,6 @@
 package com.tomspencerlondon.moviebooker.moviegoer.adapter.out.email;
 
+import lombok.extern.slf4j.Slf4j;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +10,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SESEmailer implements Emailer {
+
   @Value("${fromEmail}")
   private String fromEmail;
 
@@ -37,7 +40,7 @@ public class SESEmailer implements Emailer {
 
     }
     catch (Exception e) {
-      System.out.println(e);
+      log.error("Exception: " + e.getMessage());
     }
   }
 }
