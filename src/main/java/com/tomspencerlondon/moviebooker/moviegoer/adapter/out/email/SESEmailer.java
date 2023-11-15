@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,10 +17,11 @@ public class SESEmailer implements Emailer {
   private String fromName;
 
 
-  @Autowired(required = false)
+  @Autowired
   private JavaMailSender emailSender;
 
   @Override
+  @Async
   public void send(EmailToSend emailToSend) {
     try {
       MimeMessage message = emailSender.createMimeMessage();
