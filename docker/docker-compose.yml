@@ -1,6 +1,8 @@
 version: '3.3'
 services:
   db:
+    networks:
+      - custom_network
     image: mysql:latest
     container_name: moviegoer-mysql
     restart: always
@@ -23,6 +25,8 @@ services:
       - ~/moviebooker_data:/var/lib/mysql
 
   localstack:
+    networks:
+      - custom_network
     container_name: localstack
     image: localstack/localstack:latest
     environment:
@@ -39,3 +43,6 @@ services:
       - ${TEMPDIR:-/tmp/localstack}:/tmp/localstack
       - /var/run/docker.sock:/var/run/docker.sock
       - ./script/localstack/s3/init-s3-bucket.sh:/docker-entrypoint-initaws.d/init-s3-bucket.sh
+networks:
+  custom_network:
+    driver: bridge
