@@ -13,7 +13,7 @@
     </form>
   </div>
   <div class="px-4 py-4 sm:px-0">
-    <th:block th:each="movie : ${movies}" th:insert="admin/fragments/movie-fragments :: movie-input(movie, ${true})">
+    <th:block th:each="movie : ${movies}" th:insert="~{admin/fragments/movie-fragments :: movie-input(movie, ${true})}">
     </th:block>
   </div>
 </div>

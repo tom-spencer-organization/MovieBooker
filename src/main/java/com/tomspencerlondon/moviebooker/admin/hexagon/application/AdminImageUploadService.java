@@ -38,7 +38,7 @@ public class AdminImageUploadService {
                 request,
                 RequestBody.fromInputStream(inputStream, inputStream.available()));
 
-        String fileUrl = awsS3Config.getS3EndpointUrl() + "/" + awsS3Config.getBucketName() + "/" + fileName;
+        String fileUrl = awsS3Config.getS3EndpointUrl() + "/" + fileName;
 
         File file = new File(null, fileName, fileUrl, Objects.nonNull(putObjectResponse));
 
