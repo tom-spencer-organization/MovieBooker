@@ -13,7 +13,6 @@ public class ImageService {
 
   public String imagePath(String image) {
     String s3EndpointUrl = awsS3Config.getS3EndpointUrl();
-    String bucketName = awsS3Config.getBucketName();
-    return "%s/%s/%s".formatted(s3EndpointUrl, bucketName, image);
+    return "%s/%s".formatted(s3EndpointUrl, image);
   }
 }

@@ -13,7 +13,7 @@ public class AdminMovieView {
         AdminMovieView adminMovieView = new AdminMovieView();
         adminMovieView.setMovieId(movie.getId());
         adminMovieView.setMovieName(movie.movieName());
-        adminMovieView.setImage(movie.image());
+        adminMovieView.setImage(imagePath);
         adminMovieView.setReleaseDate(movie.releaseDateText());
         adminMovieView.setDescription(movie.description());
         return adminMovieView;
