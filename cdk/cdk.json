@@ -1,0 +1,11 @@
+{
+  "app": "mvn -e -q compile exec:java",
+  "context": {
+    "applicationName": "moviebooker-app",
+    "region": "eu-west-2",
+    "accountId": "706054169063",
+    "dockerRepositoryName": "moviebooker-app",
+    "dockerImageTag": "latest",
+    "environmentName": "staging"
+  }
+}
