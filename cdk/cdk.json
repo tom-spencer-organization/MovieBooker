@@ -6,6 +6,10 @@
     "accountId": "706054169063",
     "dockerRepositoryName": "moviebooker-app",
     "dockerImageTag": "latest",
-    "environmentName": "staging"
+    "applicationUrl": "https://app.drspencer.io",
+    "environmentName": "staging",
+    "applicationDomain": "app.drspencer.io",
+    "hostedZoneDomain": "drspencer.io",
+    "sslCertificateArn": "arn:aws:acm:eu-west-2:706054169063:certificate/4f5060a3-572d-4c06-95ec-f3f066249db6"
   }
 }
