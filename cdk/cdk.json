@@ -1,10 +1,10 @@
 {
   "app": "mvn -e -q compile exec:java",
   "context": {
-    "applicationName": "moviebooker-app",
+    "applicationName": "moviebooker-spencer",
     "region": "eu-west-2",
     "accountId": "706054169063",
-    "dockerRepositoryName": "moviebooker-app",
+    "dockerRepositoryName": "moviebooker-spencer",
     "dockerImageTag": "latest",
     "applicationUrl": "https://app.drspencer.io",
     "environmentName": "staging",
