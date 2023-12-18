@@ -1,11 +1,10 @@
 package com.tomspencerlondon;
 
 
-import static java.util.Collections.singletonList;
-
 import dev.stratospheric.cdk.ApplicationEnvironment;
 import dev.stratospheric.cdk.Network;
 import dev.stratospheric.cdk.PostgresDatabase;
+import dev.stratospheric.cdk.PostgresDatabase.DatabaseOutputParameters;
 import dev.stratospheric.cdk.Service;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,9 +33,6 @@ public class ServiceApp {
 
     String accountId = (String) app.getNode().tryGetContext("accountId");
     Validations.requireNonEmpty(accountId, "context variable 'accountId' must not be null");
-
-    String springProfile = (String) app.getNode().tryGetContext("springProfile");
-    Validations.requireNonEmpty(springProfile, "context variable 'springProfile' must not be null");
 
     String dockerRepositoryName = (String) app.getNode().tryGetContext("dockerRepositoryName");
     Validations.requireNonEmpty(dockerRepositoryName, "context variable 'dockerRepositoryName' must not be null");
@@ -91,7 +87,6 @@ public class ServiceApp {
             environmentVariables(
                 serviceStack,
                 databaseOutputParameters,
-                springProfile,
                 environmentName))
             .withCpu(512)
             .withMemory(1024)
@@ -119,8 +114,7 @@ public class ServiceApp {
 
   static Map<String, String> environmentVariables(
       Construct scope,
-      PostgresDatabase.DatabaseOutputParameters databaseOutputParameters,
-      String springProfile,
+      DatabaseOutputParameters databaseOutputParameters,
       String environmentName
   ) {
     Map<String, String> vars = new HashMap<>();
@@ -128,7 +122,6 @@ public class ServiceApp {
     String databaseSecretArn = databaseOutputParameters.getDatabaseSecretArn();
     ISecret databaseSecret = Secret.fromSecretCompleteArn(scope, "databaseSecret", databaseSecretArn);
 
-    vars.put("SPRING_PROFILES_ACTIVE", springProfile);
     vars.put("SPRING_DATASOURCE_URL",
         String.format("jdbc:mysql://%s:%s/%s",
             databaseOutputParameters.getEndpointAddress(),
