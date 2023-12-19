@@ -24,6 +24,9 @@ jobs:
           java-version: '20'
           distribution: 'corretto'
 
+      - name: Build with Maven
+        run: mvn clean install
+
       - name: Set up Node 20
         uses: actions/setup-node@v3
         with:
