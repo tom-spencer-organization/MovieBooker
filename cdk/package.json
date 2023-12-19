@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "This is a blank project for CDK development with Java.",
   "scripts": {
-    "bootstrap": "cdk bootstrap --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.BootstrapApp\"",
-    "certificate:deploy": "cdk deploy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.CertificateApp\" --require-approval never",
-    "certificate:destroy": "cdk destroy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.CertificateApp\" --force --require-approval never",
-    "database:deploy": "cdk deploy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DatabaseApp\"",
-    "database:destroy": "cdk destroy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DatabaseApp\" --force --require-approval never",
-    "network:deploy": "cdk deploy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.NetworkApp\" --require-approval never",
-    "network:destroy": "cdk destroy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.NetworkApp\" --force --require-approval never",
-    "repository:deploy": "cdk deploy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --require-approval never",
-    "repository:destroy": "cdk destroy --app \"mvn -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --force --require-approval never"
+    "bootstrap": "cdk bootstrap --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.BootstrapApp\"",
+    "certificate:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.CertificateApp\" --require-approval never",
+    "certificate:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.CertificateApp\" --force --require-approval never",
+    "database:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DatabaseApp\"",
+    "database:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DatabaseApp\" --force --require-approval never",
+    "network:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.NetworkApp\" --require-approval never",
+    "network:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.NetworkApp\" --force --require-approval never",
+    "repository:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --require-approval never",
+    "repository:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --force --require-approval never"
   },
   "devDependencies": {
     "aws-cdk": "^2.114.1"
