@@ -42,12 +42,12 @@ jobs:
         env:
           DOCKER_IMAGE_TAG: ${{ steps.dockerImageTag.outputs.tag }}
         run: |
-          docker build -t moviebooker-app .
-          docker tag moviebooker-app ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-app:${DOCKER_IMAGE_TAG}
-          docker tag moviebooker-app ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-app:latest
+          docker build -t moviebooker-spencer .
+          docker tag moviebooker-spencer ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:${DOCKER_IMAGE_TAG}
+          docker tag moviebooker-spencer ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:latest
           aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-          docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-app:${DOCKER_IMAGE_TAG}
-          docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-app:latest
+          docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:${DOCKER_IMAGE_TAG}
+          docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:latest
   deploy:
     runs-on: ubuntu-20.04
     name: Deploy Moviebooker app
@@ -85,5 +85,5 @@ jobs:
       - name: Clean up old parameter stacks
         working-directory: cdk
         run: |
-          aws cloudformation describe-stacks --region eu-central-1 --query "Stacks[].StackName" --output text | sed -e "s/\s\+/\n/g" | grep -e "staging-todo-app-Service-Parameters" | sort -r | tail -n+2 > stacks_to_be_deleted.txt
+          aws cloudformation describe-stacks --region eu-central-1 --query "Stacks[].StackName" --output text | sed -e "s/\s\+/\n/g" | grep -e "staging-moviebooker-Service-Parameters" | sort -r | tail -n+2 > stacks_to_be_deleted.txt
           for stack in $(cat stacks_to_be_deleted.txt); do aws cloudformation delete-stack --stack-name $stack --region eu-central-1;  done
