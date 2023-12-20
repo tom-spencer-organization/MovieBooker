@@ -18,6 +18,9 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    name: Build and publish Moviebooker App
+    outputs:
+      dockerImageTag: ${{ steps.dockerImageTag.outputs.tag }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
