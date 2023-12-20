@@ -5,7 +5,7 @@
     "region": "eu-west-2",
     "accountId": "706054169063",
     "dockerRepositoryName": "moviebooker-spencer",
-    "dockerImageTag": "latest",
+    "dockerImageTag": "DYNAMICALLY_OVERRIDDEN_BY_WORKFLOW",
     "applicationUrl": "https://app.drspencer.io",
     "environmentName": "staging",
     "applicationDomain": "app.drspencer.io",
