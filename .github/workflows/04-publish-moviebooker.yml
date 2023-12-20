@@ -41,7 +41,6 @@ jobs:
         if: github.ref == 'refs/heads/main' || contains(github.event.head_commit.message, 'DEPLOY NOW')
         env:
           DOCKER_IMAGE_TAG: ${{ steps.dockerImageTag.outputs.tag }}
-        working-directory: application
         run: |
           docker build -t moviebooker-app .
           docker tag moviebooker-app ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-app:${DOCKER_IMAGE_TAG}
