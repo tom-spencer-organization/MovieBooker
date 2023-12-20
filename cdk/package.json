@@ -14,6 +14,8 @@
     "network:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.NetworkApp\" --force --require-approval never",
     "repository:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --require-approval never",
     "repository:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --force --require-approval never",
+    "service:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.ServiceApp\" --require-approval never --all",
+    "service:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.ServiceApp\" --force --require-approval never --all",
     "github-actions:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --require-approval never --all",
     "github-actions:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.tomspencerlondon.DockerRepositoryApp\" --force --require-approval never --all"
 
