@@ -43,7 +43,7 @@ jobs:
         env:
           DOCKER_IMAGE_TAG: ${{ steps.dockerImageTag.outputs.tag }}
         run: |
-          docker build -t moviebooker-spencer .
+          docker build -t moviebooker-spencer . --platform linux/amd64
           docker tag moviebooker-spencer ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:${DOCKER_IMAGE_TAG}
           docker tag moviebooker-spencer ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/moviebooker-spencer:latest
           aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
