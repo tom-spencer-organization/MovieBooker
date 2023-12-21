@@ -10,7 +10,7 @@
     "environmentName": "staging",
     "applicationDomain": "app.drspencer.io",
     "hostedZoneDomain": "drspencer.io",
-    "sslCertificateArn": "arn:aws:acm:eu-west-2:706054169063:certificate/4f5060a3-572d-4c06-95ec-f3f066249db6",
+    "sslCertificateArn": "arn:aws:acm:eu-west-2:706054169063:certificate/1b13ec75-3fc5-4c67-993d-b2a911b209cc",
     "githubActionsUsername": "TomSpencerLondon"
   }
 }
