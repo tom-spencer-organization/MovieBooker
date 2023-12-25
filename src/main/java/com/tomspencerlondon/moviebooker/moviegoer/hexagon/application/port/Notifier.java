@@ -4,5 +4,5 @@ import com.tomspencerlondon.moviebooker.moviegoer.hexagon.domain.Booking;
 
 public interface Notifier {
 
-  void confirmBooking(Booking booking);
+  void confirmBooking(Booking booking, String username);
 }

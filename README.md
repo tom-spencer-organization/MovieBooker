@@ -29,3 +29,25 @@ mvn clean install spring-boot:run
 and
 npm run build && npm run watch
 ```
+
+
+Notes on talk:
+
+1. Keep it simple
+2. Explain what the CDK is
+3. Do a simple version - S3 bucket
+4. What people hope to get from talk:
+   - Understanding of CDK
+   - How to do it in Java
+   - Pros and Cons -- advantage versus terraform
+Demo - S3 bucket
+   - Terraform version of S3 bucket
+based on Stratospheric book and CDK
+---
+- Email - how I solved the problem of spam message in email (blog post)
+problem how overcame it:
+https://levelup.gitconnected.com/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
+
+_dmarc.tomsawspractice.link
+TXT
+"v=DMARC1;p=quarantine;pct=25;rua=mailto:dmarcreports@example.com"

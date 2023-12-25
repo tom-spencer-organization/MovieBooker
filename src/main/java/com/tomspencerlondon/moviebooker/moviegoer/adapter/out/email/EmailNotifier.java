@@ -5,7 +5,6 @@ import com.tomspencerlondon.moviebooker.moviegoer.hexagon.domain.Booking;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -24,7 +23,7 @@ public class EmailNotifier implements Notifier {
   }
 
   @Override
-  public void confirmBooking(Booking booking) {
+  public void confirmBooking(Booking booking, String username) {
     Map<String, Object> templateModel = new HashMap<>();
     templateModel.put("recipientName", "tomspencerlondon@gmail.com");
     String body = """
@@ -43,8 +42,7 @@ public class EmailNotifier implements Notifier {
 
     String htmlBody = thymeleafTemplateEngine.process("emails/paymentConfirmation", thymeleafContext);
 
-    EmailToSend emailToSend = new EmailToSend("MovieBooker ticket booked!", htmlBody,
-        "tomspencerlondon@gmail.com");
+    EmailToSend emailToSend = new EmailToSend("MovieBooker ticket booked!", htmlBody, username);
     emailer.send(emailToSend);
   }
 }

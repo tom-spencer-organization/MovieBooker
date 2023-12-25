@@ -58,7 +58,7 @@ public class BookingService {
         Booking savedBooking = bookingRepository.save(booking);
         payment.associateBooking(savedBooking);
         paymentRepository.save(payment);
-        notifier.confirmBooking(savedBooking);
+        notifier.confirmBooking(savedBooking, movieGoer.userName());
         return notification;
     }
 
@@ -101,7 +101,7 @@ public class BookingService {
         payment.associateBooking(savedBooking);
         paymentRepository.save(payment);
 
-        notifier.confirmBooking(booking);
+        notifier.confirmBooking(booking, movieGoer.userName());
 
         return bookingResult;
     }
