@@ -1,6 +1,7 @@
 package com.tomspencerlondon.moviebooker.config;
 
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +26,10 @@ public class AWSS3Config {
     @Bean(name = "amazonS3")
     public S3Client amazonS3() throws URISyntaxException {
         return S3Client.builder()
-                .region(Region.EU_WEST_2)
+            .endpointOverride(URI.create(s3EndpointUrl))
+                .region(Region.of(region))
                 .credentialsProvider(getCredentialsProvider())
-                .build();
+            .build();
     }
 
     private AwsCredentialsProvider getCredentialsProvider() {
