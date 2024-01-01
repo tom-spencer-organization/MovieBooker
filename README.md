@@ -1,53 +1,78 @@
 ### Movie Booker
 
-### Design (22 March 2023)
-![image](https://user-images.githubusercontent.com/27693622/226953854-95fc8aff-9684-49f9-8891-2d7fa1126037.png)
+#### Overview
 
-### Updated Design
-![image](https://user-images.githubusercontent.com/27693622/226958765-a7f662da-0418-4c15-ab27-8713d1caf92b.png)
+This application streamlines the process of booking movie tickets and managing movie programs for both moviegoers and staff.
+
+#### Key Features:
+
+##### User Roles:
+
+*Movie Goer*: Can create accounts, book tickets, earn and redeem loyalty points.
+
+*Staff*: Can add movies and programs.
+
+##### Login and Registration:
+
+The first screen prompts users to either log in or register for their respective roles.
+
+##### Movie and Program Management (Staff):
+
+Staff can add new movies with details like title, genre, release date, picture, and synopsis.
+Staff can create programs for movies, specifying showtimes, available seats, screens, and pricing.
+
+##### Ticket Booking (Movie Goer):
+
+Movie goers can browse available movies and programs.
+Payment is calculated based on the number of seats and ticket prices.
+
+##### Loyalty Program:
+
+Movie goers earn loyalty points for each booking.
+Loyalty points can be redeemed for discounts on future bookings.
+The payment calculation automatically considers loyalty points and applies discounts.
 
 ### Cloud Architecture
 ![image](https://github.com/TomSpencerLondon/LeetCode/assets/27693622/93bdbb05-03a0-4ebe-a6d4-37f9fc7d43b5)
 
-```bash
-mvn clean install spring-boot:run
-and
-npm run build && npm run watch
-```
-#### Run with maven
+### Local SETUP
+
+- This is a monolithic maven project, built in java with [Thymeleaf](https://www.thymeleaf.org/). 
+- You require java version 20 and node version 20 to run locally.
+- The application stores and fetches data from database, therefore you need to get mysql database running locally.
+- Staff upload movie images which are stored in S3 bucket 
+- using [localstack](https://www.localstack.cloud/) we will have our own local running s3 bucket
+
+#### Local DB and S3
 ```bash
 cd /docker/
 docker-compose up -d
 ```
 
+#### Build the jar
 ```bash
 mvn clean install
 ```
 
+#### Running the script to set environment variables
+
 ```bash
-mvn clean install spring-boot:run
+chmod +x LocalEnvironmentVariablesSet.sh
+. ./LocalEnvironmentVariablesSet.sh
+```
+
+
+#### Running the application with terminal
+
+```bash
+mvn spring-boot:run
 and
 npm run build && npm run watch
 ```
 
+#### Running the application with IntelliJ IDE
+Run below configuration:
 
-Notes on talk:
-
-1. Keep it simple
-2. Explain what the CDK is
-3. Do a simple version - S3 bucket
-4. What people hope to get from talk:
-   - Understanding of CDK
-   - How to do it in Java
-   - Pros and Cons -- advantage versus terraform
-Demo - S3 bucket
-   - Terraform version of S3 bucket
-based on Stratospheric book and CDK
----
-- Email - how I solved the problem of spam message in email (blog post)
-problem how overcame it:
-https://levelup.gitconnected.com/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
-
-_dmarc.tomsawspractice.link
-TXT
-"v=DMARC1;p=quarantine;pct=25;rua=mailto:dmarcreports@example.com"
+```bash
+.run/MovieBooker - Local Run.run.xml
+```

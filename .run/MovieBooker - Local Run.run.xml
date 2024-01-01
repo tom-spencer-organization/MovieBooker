@@ -1,17 +1,16 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="MovieBooker - Local Run" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
-      <env name="AWS_S3_BUCKET_URL" value="http://movie-images-s3-bucket.s3.us-east-1.localhost.localstack.cloud:4566" />
+      <env name="DATABASE_URL" value="jdbc:mysql://localhost:3306/cinema?useSSL=false&amp;allowPublicKeyRetrieval=true" />
+      <env name="DATABASE_USERNAME" value="user" />
+      <env name="DATABASE_PASSWORD" value="password" />
+      <env name="S3_REGION" value="us-east-1" />
+      <env name="S3_URL" value="http://movie-images-s3-bucket.s3.us-east-1.localhost.localstack.cloud:4566" />
+      <env name="AWS_ACCESS_KEY" value="test" />
+      <env name="AWS_SECRET_KEY" value="test" />
     </envs>
     <module name="MovieBooker" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.tomspencerlondon.moviebooker.MovieBookerApplication" />
-    <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-      <option name="credential" />
-      <option name="region" />
-      <option name="useCurrentConnection" value="false" />
-    </extension>
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
