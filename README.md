@@ -82,7 +82,7 @@ Run below configuration:
 ### Deployment Steps
 
 Step 1: Deploy the Surrounding Infrastructure
-1. Clone the Stratospheric repository from GitHub:
+1. Clone the MovieBooker repository from GitHub:
 bash
 git clone https://github.com/tom-spencer-organisation/MovieBooker.git
 cd MovieBooker/cdk
