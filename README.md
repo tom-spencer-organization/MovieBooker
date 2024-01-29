@@ -77,74 +77,104 @@ Run below configuration:
 .run/MovieBooker - Local Run.run.xml
 
 ```
+# MovieBooker Application Deployment
 
+## Step 1: Deploy the Surrounding Infrastructure
 
-### Deployment Steps
-
-Step 1: Deploy the Surrounding Infrastructure
 1. Clone the MovieBooker repository from GitHub:
-bash
-git clone https://github.com/tom-spencer-organisation/MovieBooker.git
-cd MovieBooker/cdk
+
+    ```bash
+    git clone https://github.com/tom-spencer-organisation/MovieBooker.git
+    cd MovieBooker/cdk
+    ```
 
 2. Navigate to the cdk folder:
-bash
-cd cdk
 
-3. Adjust the configuration in cdk.json: Edit the cdk.json file and modify the following parameters:
-applicationName: Name of your application.
-region: AWS region to deploy the infrastructure to (e.g., eu-west-2).
-accountId: Your AWS account ID.
-dockerRepositoryName: Name of your Docker repository (e.g., todo-app).
-dockerImageTag: Docker image version.
-applicationUrl: Full application URL.
+    ```bash
+    cd cdk
+    ```
+
+3. Adjust the configuration in `cdk.json`:
+
+   Edit the `cdk.json` file and modify the following parameters:
+   - `applicationName`: Name of your application.
+   - `region`: AWS region to deploy the infrastructure to (e.g., `eu-west-2`).
+   - `accountId`: Your AWS account ID.
+   - `dockerRepositoryName`: Name of your Docker repository (e.g., `todo-app`).
+   - `dockerImageTag`: Docker image version.
+   - `applicationUrl`: Full application URL.
+
 4. Bootstrap CDK for your AWS account:
-bash
-npm install
-npm run bootstrap
+
+    ```bash
+    npm install
+    npm run bootstrap
+    ```
 
 5. Create an SSL certificate for your domain:
-bash
-npm run certificate:deploy
 
-Copy the sslCertificateArn to the cdk.json file.
+    ```bash
+    npm run certificate:deploy
+    ```
+
+   Copy the `sslCertificateArn` to the `cdk.json` file.
+
 6. Deploy the NetworkStack-dependent infrastructure:
-bash
-npm run network:deploy
-npm run database:deploy
+
+    ```bash
+    npm run network:deploy
+    npm run database:deploy
+    ```
 
 7. Deploy NetworkStack-independent infrastructure:
-bash
-npm run repository:deploy
+
+    ```bash
+    npm run repository:deploy
+    ```
 
 8. Route traffic from your custom domain to the ELB:
-bash
-npm run domain:deploy
 
-Step 2: Build and Push the First Docker Image
+    ```bash
+    npm run domain:deploy
+    ```
+
+## Step 2: Build and Push the First Docker Image
+
 1. Build the first Docker image:
-bash
-cd ..
-mvn clean install
-docker build -t <accountId>.dkr.ecr.<region>.amazonaws.com/<applicationName>:1 .
-aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <accountId>.dkr.ecr.<region>.amazonaws.com
-docker push <accountId>.dkr.ecr.<region>.amazonaws.com/<applicationName>:1
 
-On Apple M1:
-bash
-docker build --platform linux/amd64 --push -t <accountId>.dkr.ecr.<region>.amazonaws.com/todo-app:1 .
+    ```bash
+    cd ..
+    mvn clean install
+    docker build -t <YOUR_ECR_REGISTRY>/<YOUR_REPOSITORY_NAME>:1 .
+    aws ecr get-login-password --region <YOUR_REGION> | docker login --username AWS --password-stdin <YOUR_ECR_REGISTRY>
+    docker push <YOUR_ECR_REGISTRY>/<YOUR_REPOSITORY_NAME>:1
+    ```
 
-Step 3: Deploy the Docker Image to the ECS Cluster
-1. Customize the dockerImageTag property: Edit the cdk/cdk.json file and set the dockerImageTag property.
+   On Apple M1:
+
+    ```bash
+    docker build --platform linux/amd64 --push -t <YOUR_ECR_REGISTRY>/<YOUR_REPOSITORY_NAME>:1 .
+    ```
+
+## Step 3: Deploy the Docker Image to the ECS Cluster
+
+1. Customize the `dockerImageTag` property:
+
+   Edit the `cdk/cdk.json` file and set the `dockerImageTag` property.
+
 2. Deploy the service:
-bash
-npm run service:deploy
 
-Step 4: Destroy Everything
+    ```bash
+    npm run service:deploy
+    ```
+
+## Step 4: Destroy Everything
+
 Run the following commands in reverse order to destroy resources:
-bash
-npm run *:destroy
-Visit the CloudFormation web console to ensure all stacks have been removed.
-These commands should guide you through the deployment and teardown processes for the MovieBooker application using AWS CDK.
 
-
+```bash
+npm run service:destroy
+npm run domain:destroy
+npm run repository:destroy
+npm run database:destroy
+npm run network:destroy
